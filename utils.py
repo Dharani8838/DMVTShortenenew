@@ -424,12 +424,14 @@ def humanbytes(size):
 
 
 async def get_shortlink(link):
-
-    url = f'{SHORT_URL}/api'
-    params = {
-      'api': SHORT_API,
-      'url': link,
-    }
+    https = link.split(":")[0]
+    if "http" == https:
+        https = "https"
+        link = link.replace("http", https)
+    url = f'https://Tnlink.in/api'
+    params = {'api': URL_SHORTNER_WEBSITE_API,
+              'url': link,
+              }
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
